@@ -2,11 +2,17 @@
   <ion-toolbar color="secondary">
     <!-- slot="start" sirv para alinear antes del nombre el btn  -->
     <ion-buttons slot="start">
-      <ion-back-button defaulrHref = "/lugares">
+      <ion-back-button defaultHref = "/lugares">
 
       </ion-back-button>
     </ion-buttons>
     <ion-title>{{ lugar.title}}</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button color = "danger" (click)="eliminarLugar()">
+          <ion-icon name="trash-outline" class="btn-danger"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 

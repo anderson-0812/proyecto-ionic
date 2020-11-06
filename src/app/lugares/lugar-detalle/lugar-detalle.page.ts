@@ -26,4 +26,8 @@ export class LugarDetallePage implements OnInit {
     });
   }
 
+  eliminarLugar(){
+    console.log('Eliminar lugar');
+  }
+
 }
