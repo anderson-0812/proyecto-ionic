@@ -1,9 +1,35 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>lugar-detalle</ion-title>
+    <!-- slot="start" sirv para alinear antes del nombre el btn  -->
+    <ion-buttons slot="start">
+      <ion-back-button defaulrHref = "/lugares">
+
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ lugar.title}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col class="ion-no-padding">
+        <ion-img [src]="lugar.imagenURL"></ion-img>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <h1 class="ion-text-center">{{ lugar.title }}</h1>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item *ngFor = " let comment of lugar.comentarios">
+            {{ comment }}
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
