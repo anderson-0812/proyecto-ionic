@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 // import { ActivatedRoute } from 'node_modules/@angular/router/router';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { Lugar } from '../lugar.model';
 import { LugaresService } from '../lugares.service';
 
@@ -13,7 +14,7 @@ export class LugarDetallePage implements OnInit {
 
   lugar: Lugar;
 
-  constructor(private activatedRoute: ActivatedRoute, private lugaresService: LugaresService) { }
+  constructor(private activatedRoute: ActivatedRoute, private lugaresService: LugaresService, private router: Router, private alerta: AlertController) { }
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe(paramMap => {
@@ -26,8 +27,27 @@ export class LugarDetallePage implements OnInit {
     });
   }
 
-  eliminarLugar(){
+  async eliminarLugar(){
     console.log('Eliminar lugar');
+    const alertaElemento = await this.alerta.create({
+      header: 'Estas seguro de eliminar este lugar?? ',
+      message: 'recuerda que no se podra recuperar despues ',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        },
+        {
+          text: 'Aceptar',
+          handler: () => {
+            this.lugaresService.deletLugar(this.lugar.id);
+            this.router.navigate(['/lugares']);
+          }
+        },
+      ]
+    });
+
+    await alertaElemento.present();
   }
 
 }

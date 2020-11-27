@@ -11,7 +11,7 @@
 </div>-->
 <ion-list>
   <ion-item *ngFor="let lugar of places" [routerLink]="['/lugares', lugar.id]">
-    <ion-avatar>
+    <ion-avatar class="ava-lugar">
       <ion-img [src]="lugar.imagenURL"></ion-img>
     </ion-avatar>
     <ion-label>

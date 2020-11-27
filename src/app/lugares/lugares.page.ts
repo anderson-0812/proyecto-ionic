@@ -18,5 +18,9 @@ export class LugaresPage implements OnInit {
   ngOnInit() {
     this.places = this.lugaresServicio.getLugares()
   }
+  // Recarga la vista con los datos actualizados sirve para que lso datos q se eliminaron o cambiaron se reflejen
+  ionViewWillEnter(){
+    this.places = this.lugaresServicio.getLugares();
+  }
 
 }
