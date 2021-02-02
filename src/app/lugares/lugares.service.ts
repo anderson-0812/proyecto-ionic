@@ -1,11 +1,20 @@
 import { Injectable } from '@angular/core';
 import { from } from 'rxjs';
-import {Lugar} from './lugar.model'
+import {Lugar} from './lugar.model';
+
+import { Global } from './../global';
+
+// Para consume rest
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+// import { Injectable } from '@angular/core';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class LugaresService {
+
+  public url: string;
 
   private places : Lugar[] = [
     {
@@ -75,10 +84,28 @@ export class LugaresService {
       comentarios:['Turstico almaximo','Archipielago hermoso','Biodiversidad marina','lugar caro pero hermoso','Tiene tortugas gigantes','hermosa vista']
     }
   ]
-  constructor() { }
+  constructor(public http: HttpClient) {
+    this.url = Global.url;
+
+   }
 
   getLugares(){
-    return [...this.places]
+
+    // const headers = new HttpHeaders().set('Content-Type', 'application/json')
+
+    //  ledigo q mi peticion tiene cabeceras de tipo aplicacion/json y le envio un token
+    const headers = new HttpHeaders().set('Content-Type', 'aplication/json')
+    .set('Access-Control-Allow-Origin', '*')
+    .set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT')
+    .set('Accept', 'application/json')
+    .set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Authorization')
+    // .set('token', token);
+
+    console.log('Users desde api django');
+    console.log(this.url + 'api/user');
+    console.log(this.http.get(this.url + 'api/user', {headers}));
+    return this.http.get(this.url + 'api/user', {headers});
+    // return [...this.places]
   }
 
   getLugar(lugarId: string) {

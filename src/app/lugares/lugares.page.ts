@@ -17,11 +17,26 @@ export class LugaresPage implements OnInit {
   constructor(private lugaresServicio : LugaresService, private router: Router) { }
 
   ngOnInit() {
-    this.places = this.lugaresServicio.getLugares()
+    // this.places = this.lugaresServicio.getLugares()
+    // this.lugaresServicio.getLugares()
+    this.getLugares();
   }
   // Recarga la vista con los datos actualizados sirve para que lso datos q se eliminaron o cambiaron se reflejen
   ionViewWillEnter(){
-    this.places = this.lugaresServicio.getLugares();
+    // this.places = this.lugaresServicio.getLugares();
+    // this.lugaresServicio.getLugares();
+    this.getLugares();
+  }
+
+  getLugares(){
+    console.log('Hola desde compoente metodo get');
+    this.lugaresServicio.getLugares().subscribe(
+      (res) => {
+        console.log('Hola desde compoente metodo get dentro del res');
+        console.log(res);
+        // this.roleService.roles = res.roleDB as Role[];
+      }
+      , error => console.log(error as any));
   }
 
   agregarLugar(){
