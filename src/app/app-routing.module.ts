@@ -27,6 +27,10 @@ const routes: Routes = [
   {
     path:"nuevo-lugar",
     loadChildren: () => import('./lugares/lugar-add/lugar-add.module').then(m => m.LugarAddPageModule)
+  },
+  {
+    path: 'users',
+    loadChildren: () => import('./users/users.module').then( m => m.UsersPageModule)
   }
 ];
 
