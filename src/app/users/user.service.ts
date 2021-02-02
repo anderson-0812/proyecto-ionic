@@ -14,6 +14,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class UserService {
   public url: string;
+  public users: User[];
+
 
   constructor(public http: HttpClient) {
     this.url = Global.url;

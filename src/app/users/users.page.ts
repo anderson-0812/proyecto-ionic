@@ -9,17 +9,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./users.page.scss'],
 })
 export class UsersPage implements OnInit {
-
+  users: any;
   constructor(private router: Router, private userService: UserService) { }
 
   ngOnInit() {
+    this.users = this.getUsers();
   }
 
   // Recarga la vista con los datos actualizados sirve para que lso datos q se eliminaron o cambiaron se reflejen
   ionViewWillEnter(){
     // this.places = this.lugaresServicio.getLugares();
     // this.lugaresServicio.getLugares();
-    this.getUsers();
+    // this.getUsers();
+    this.users = this.getUsers();
+
   }
 
   getUsers(){
@@ -28,9 +31,15 @@ export class UsersPage implements OnInit {
       (res) => {
         console.log('Hola desde compoente metodo get dentro del res');
         console.log(res);
-        // this.roleService.roles = res.roleDB as Role[];
+        // this.users = res;
+        this.userService.users = res as User[];
+        this.users = this.userService.users;
       }
       , error => console.log(error as any));
+  }
+  agregarUser(){
+    console.log('Agregar usuario ');
+    console.log(this.users);
   }
 
 }
